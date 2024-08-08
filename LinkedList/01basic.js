@@ -53,6 +53,7 @@ class LinkedList {
 
         while(index > 1){
             current = current.next;
+            index--;
         }
 
         newNode.next = current.next;
@@ -60,22 +61,21 @@ class LinkedList {
     }
 
     removeFirst(){
-        let first = this.head;
-        this.head = first.next;
-        first.next = null;
+        if(!this.head){
+            return
+        }
+        this.head = this.head.next;
     }
 
     removeLast(){
-        let last = this.head;
-        while(last.next){
-            last = last.next;
+        if(!this.head){
+            return
         }
-        let secondLast = this.head;
-        while(secondLast.next != last){
-            secondLast.next = secondLast;
+        let current = this.head;
+        while(current.next.next){
+            current = current.next;
         }
-
-        secondLast.next = null;
+        current.next = null;
     }
 
     removeFrom(index){
@@ -84,24 +84,41 @@ class LinkedList {
             return
         }
 
-        let deletingNode = this.head;
-        while(index){
-            deletingNode = deletingNode.next;
+        let current = this.head;
+        while(index > 1){
+            current = current.next;
+            index--;
         }
-        let prevDeletingNode = this.head;
-        while(prevDeletingNode.next != deletingNode){
-            prevDeletingNode.next = prevDeletingNode;
-        }
+        current.next = current.next.next;
+    }
 
-        prevDeletingNode.next = deletingNode.next;
-        deletingNode.next = null;
+    print(){
+        let current = this.head;
+        while(current){
+            console.log("current data: ", current.data, "next: ", current.next)
+            current = current.next;
+        }
     }
 }
 
 let newLL = new LinkedList();
 newLL.addFirst(5)
+newLL.print()
+console.log("\nNext Operation\n")
 newLL.addFirst(4)
+newLL.print()
+console.log("\nNext Operation\n")
 newLL.addLast(6)
+newLL.print()
+console.log("\nNext Operation\n")
 newLL.addAt(12, 1)
+newLL.print()
+console.log("\nNext Operation\n")
 newLL.removeFirst()
-console.log(newLL)
+newLL.print()
+console.log("\nNext Operation\n")
+newLL.removeFrom(1)
+newLL.print()
+console.log("\nNext Operation\n")
+newLL.removeLast()
+newLL.print()
