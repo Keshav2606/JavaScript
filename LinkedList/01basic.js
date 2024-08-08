@@ -41,7 +41,7 @@ class LinkedList {
         return size;
     }
 
-    addAtIndex(data, index){
+    addAt(data, index){
 
         if(index<0 || index > this.size()){
             console.error("Invalid Index");
@@ -60,7 +60,41 @@ class LinkedList {
     }
 
     removeFirst(){
-        
+        let first = this.head;
+        this.head = first.next;
+        first.next = null;
+    }
+
+    removeLast(){
+        let last = this.head;
+        while(last.next){
+            last = last.next;
+        }
+        let secondLast = this.head;
+        while(secondLast.next != last){
+            secondLast.next = secondLast;
+        }
+
+        secondLast.next = null;
+    }
+
+    removeFrom(index){
+        if(index<0 || index > this.size()){
+            console.error("Invalid Index");
+            return
+        }
+
+        let deletingNode = this.head;
+        while(index){
+            deletingNode = deletingNode.next;
+        }
+        let prevDeletingNode = this.head;
+        while(prevDeletingNode.next != deletingNode){
+            prevDeletingNode.next = prevDeletingNode;
+        }
+
+        prevDeletingNode.next = deletingNode.next;
+        deletingNode.next = null;
     }
 }
 
@@ -68,5 +102,6 @@ let newLL = new LinkedList();
 newLL.addFirst(5)
 newLL.addFirst(4)
 newLL.addLast(6)
-newLL.addAtIndex(12, 1)
+newLL.addAt(12, 1)
+newLL.removeFirst()
 console.log(newLL)
