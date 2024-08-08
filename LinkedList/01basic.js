@@ -30,7 +30,23 @@ class LinkedList {
         current.next = newNode;
     }
 
+    size(){
+        let current = this.head;
+        let size = 0;
+        while(current.next){
+            size++;
+            current = current.next;
+        }
+
+        return size;
+    }
+
     addAtIndex(data, index){
+
+        if(index<0 || index > this.size()){
+            console.error("Invalid Index");
+            return
+        }
         const newNode = new Node(data);
 
         let current = this.head;
@@ -41,6 +57,10 @@ class LinkedList {
 
         newNode.next = current.next;
         current.next = newNode;
+    }
+
+    removeFirst(){
+        
     }
 }
 
